@@ -23,7 +23,6 @@ export class NewsDetailsComponent implements OnInit {
   ngOnInit() {
     this.route.queryParams.subscribe((params: Params) => {
       this.p = params['page'];
-      console.log(params['page']);
       this.newsService.getNewsById(params['id']).subscribe(singleNews => {
         this.singleNews = singleNews[0];
         console.log(this.singleNews)

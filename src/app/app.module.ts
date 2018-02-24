@@ -12,6 +12,7 @@ import { AddNewsComponent } from './components/add-news/add-news.component';
 import { NewsService } from './services/news.service';
 
 import { NgxPaginationModule } from 'ngx-pagination';
+import { FlashMessagesModule } from 'ngx-flash-messages';
 import { SearchPipe } from './pipes/search.pipe';
 
 @NgModule({
@@ -27,6 +28,7 @@ import { SearchPipe } from './pipes/search.pipe';
     BrowserModule,
     HttpClientModule,
     FormsModule,
+    FlashMessagesModule,
     NgxPaginationModule,
     RouterModule.forRoot([
       { path: '', redirectTo: '/news', pathMatch: 'full' },

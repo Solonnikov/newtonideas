@@ -19,7 +19,7 @@
         <div class="text-center">
           <pagination-controls (pageChange)="p = $event"></pagination-controls>
         </div>
-        <button class="btn btn-success btn-sm">Add News</button>
+        <button [routerLink]="['/add']" class="btn btn-success btn-sm">Add News</button>
       </div>
     </div>
   </div>

@@ -19,7 +19,10 @@ export class NewsListComponent implements OnInit {
     public newsService: NewsService,
     public route: ActivatedRoute,
     public router: Router
-  ) { }
+  ) {
+    // store news in ls
+    this.newsService.storeNews();
+   }
 
   ngOnInit() {
     this.route.queryParams.subscribe((params: Params) => {

@@ -13,7 +13,11 @@ export class NewsService {
   news: News[];
 
   constructor(public http: HttpClient) {
-    this.news = NEWS;
+    this.news = JSON.parse(localStorage.getItem('news'));
+  }
+
+  storeNews() {
+    localStorage.setItem('news', JSON.stringify(this.news));
   }
 
   // Get news list
@@ -30,5 +34,12 @@ export class NewsService {
     return of(this.news)
       .map(res => res
         .filter(data => data.id === id));
+  }
+
+  addNews(value: Object): Observable<News> {
+    const news = JSON.parse(localStorage.getItem('news'));
+    news.unshift(value);
+    localStorage.setItem('news', JSON.stringify(news));
+    return of(news);
   }
 }
