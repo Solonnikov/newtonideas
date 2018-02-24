@@ -1,5 +1,19 @@
 <section id="news-list">
   <div class="container p-4">
-    News list
+    <h3 class="display-4">News</h3>
+    <div class="row">
+      <div class="col">
+        <div *ngFor="let new of news" class="card mb-3">
+          <div class="card-header bg-info text-light">
+            {{new.title}}
+          </div>
+          <div class="card-body">
+            <div class="card-text">
+              {{new.description}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
