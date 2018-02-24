@@ -23,9 +23,10 @@ import { NewsService } from './services/news.service';
     BrowserModule,
     HttpClientModule,
     RouterModule.forRoot([
-      { path: '', component: NewsListComponent },
+      { path: '', redirectTo: '/news', pathMatch: 'full' },
+      { path: 'news', component: NewsListComponent },
       { path: 'add', component: AddNewsComponent },
-      { path: ':id', component: NewsDetailsComponent }
+      { path: 'news/:id', component: NewsDetailsComponent }
     ])
   ],
   providers: [NewsService],

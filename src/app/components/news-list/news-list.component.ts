@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NewsService } from '../../services/news.service';
-import { UUID } from 'angular2-uuid';
+import { News } from '../../models/News';
 
 @Component({
   selector: 'app-news-list',
@@ -8,19 +8,13 @@ import { UUID } from 'angular2-uuid';
   styleUrls: ['./news-list.component.css']
 })
 export class NewsListComponent implements OnInit {
-  news: any;
- 
+  news: News[] = [];
 
   constructor(public newsService: NewsService) { }
 
   ngOnInit() {
     this.newsService.getNews().subscribe(news => {
       this.news = news;
-      
-      // Generate UUID
-      this.news.map(news => {
-        news.id = UUID.UUID();
-      });
       console.log(this.news);
     })
   }
