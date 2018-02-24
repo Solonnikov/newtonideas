@@ -11,6 +11,7 @@ import {Location} from '@angular/common';
 })
 export class NewsDetailsComponent implements OnInit {
   singleNews: News;
+  p: number;
 
   constructor(
     public route: ActivatedRoute,
@@ -20,7 +21,9 @@ export class NewsDetailsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.route.params.subscribe((params: Params) => {
+    this.route.queryParams.subscribe((params: Params) => {
+      this.p = params['page'];
+      console.log(params['page']);
       this.newsService.getNewsById(params['id']).subscribe(singleNews => {
         this.singleNews = singleNews[0];
         console.log(this.singleNews)

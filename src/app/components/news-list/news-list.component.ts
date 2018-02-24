@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NewsService } from '../../services/news.service';
 import { News } from '../../models/News';
+import { ActivatedRoute, Router, Params } from '@angular/router';
 
 @Component({
   selector: 'app-news-list',
@@ -9,13 +10,24 @@ import { News } from '../../models/News';
 })
 export class NewsListComponent implements OnInit {
   news: News[] = [];
+  // pagination page
+  p: number = 1;
+  // search 
+  searchField = '';
 
-  constructor(public newsService: NewsService) { }
+  constructor(
+    public newsService: NewsService,
+    public route: ActivatedRoute,
+    public router: Router
+  ) { }
 
   ngOnInit() {
-    this.newsService.getNews().subscribe(news => {
-      this.news = news;
-      console.log(this.news);
-    })
+    this.route.queryParams.subscribe((params: Params) => {
+      this.p = params['page']
+      this.newsService.getNews().subscribe(news => {
+        this.news = news;
+        console.log(this.news);
+      })
+    });
   }
 }

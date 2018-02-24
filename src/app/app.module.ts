@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
@@ -10,6 +11,8 @@ import { NewsDetailsComponent } from './components/news-details/news-details.com
 import { AddNewsComponent } from './components/add-news/add-news.component';
 import { NewsService } from './services/news.service';
 
+import { NgxPaginationModule } from 'ngx-pagination';
+import { SearchPipe } from './pipes/search.pipe';
 
 @NgModule({
   declarations: [
@@ -17,11 +20,14 @@ import { NewsService } from './services/news.service';
     NavbarComponent,
     NewsListComponent,
     NewsDetailsComponent,
-    AddNewsComponent
+    AddNewsComponent,
+    SearchPipe
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
+    FormsModule,
+    NgxPaginationModule,
     RouterModule.forRoot([
       { path: '', redirectTo: '/news', pathMatch: 'full' },
       { path: 'news', component: NewsListComponent },
