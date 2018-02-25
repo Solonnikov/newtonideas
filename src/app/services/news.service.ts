@@ -13,25 +13,36 @@ export class NewsService {
   news: News[];
 
   constructor(public http: HttpClient) {
-    this.news = JSON.parse(localStorage.getItem('news'));
+    if (localStorage.getItem('news') !== null) {
+      this.news = JSON.parse(localStorage.getItem('news'));
+      // Generate UUID
+      this.news.map(news => {
+        news.id = UUID.UUID();
+      });
+    } else {
+      this.news = NEWS;
+      // Generate UUID
+      this.news.map(news => {
+        news.id = UUID.UUID();
+      });
+    }
   }
 
+  // store news arr in ls on init
   storeNews() {
     localStorage.setItem('news', JSON.stringify(this.news));
   }
 
   // Get news list
   getNews(): Observable<News[]> {
-    // Generate UUID
-    this.news.map(news => {
-      news.id = UUID.UUID();
-    });
-    return of(this.news);
+    const news = JSON.parse(localStorage.getItem('news'));
+    return of(news);
   }
 
   // Get single news
   getNewsById(id: string): Observable<News[]> {
-    return of(this.news)
+    const news = JSON.parse(localStorage.getItem('news'));
+    return of(news)
       .map(res => res
         .filter(data => data.id === id));
   }

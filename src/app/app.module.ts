@@ -13,7 +13,7 @@ import { NewsService } from './services/news.service';
 
 import { NgxPaginationModule } from 'ngx-pagination';
 import { FlashMessagesModule } from 'ngx-flash-messages';
-import { SearchPipe } from './pipes/search.pipe';
+import { FilterPipe } from './pipes/filter.pipe';
 
 @NgModule({
   declarations: [
@@ -22,7 +22,7 @@ import { SearchPipe } from './pipes/search.pipe';
     NewsListComponent,
     NewsDetailsComponent,
     AddNewsComponent,
-    SearchPipe
+    FilterPipe
   ],
   imports: [
     BrowserModule,

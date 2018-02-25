@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { NewsService } from '../../services/news.service';
 import { News } from '../../models/News';
-import {Location} from '@angular/common';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-news-details',
@@ -28,9 +28,5 @@ export class NewsDetailsComponent implements OnInit {
         console.log(this.singleNews)
       });
     });
-  }
-
-  goBack() {
-    this.location.back();
   }
 }

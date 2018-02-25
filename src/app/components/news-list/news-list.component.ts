@@ -12,17 +12,19 @@ export class NewsListComponent implements OnInit {
   news: News[] = [];
   // pagination page
   p: number = 1;
-  // search 
-  searchField = '';
+  // filter 
+  category = '';
 
   constructor(
     public newsService: NewsService,
     public route: ActivatedRoute,
     public router: Router
   ) {
-    // store news in ls
-    this.newsService.storeNews();
-   }
+    // store news on load
+    if (localStorage.getItem('news') === null) {
+      this.newsService.storeNews();
+    }
+  }
 
   ngOnInit() {
     this.route.queryParams.subscribe((params: Params) => {
@@ -32,5 +34,9 @@ export class NewsListComponent implements OnInit {
         console.log(this.news);
       })
     });
+  }
+
+  updateCategory(filter: string) {
+    this.category = filter;
   }
 }
