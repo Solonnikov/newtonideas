@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NewsService } from '../../services/news.service';
 import { News } from '../../models/News';
 import { ActivatedRoute, Router, Params } from '@angular/router';
+import * as _ from 'underscore';
 
 @Component({
   selector: 'app-news-list',
@@ -34,11 +35,13 @@ export class NewsListComponent implements OnInit {
         this.category = params['category']
       }
       this.newsService.getNews().subscribe(news => {
-        this.news = news;
-        console.log(this.news);
+        console.log(news);
+        this.news = news.data;
+        this.count = news.count;
       })
     });
   }
+
 
   updateCategory(filter: string) {
     this.category = filter;

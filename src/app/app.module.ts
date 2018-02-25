@@ -14,8 +14,6 @@ import { NewsService } from './services/news.service';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { FlashMessagesModule } from 'ngx-flash-messages';
 import { FilterPipe } from './pipes/filter.pipe';
-import { PagerService } from './services/pager.service';
-import { PagerComponent } from './components/pager/pager.component';
 
 @NgModule({
   declarations: [
@@ -24,8 +22,7 @@ import { PagerComponent } from './components/pager/pager.component';
     NewsListComponent,
     NewsDetailsComponent,
     AddNewsComponent,
-    FilterPipe,
-    PagerComponent
+    FilterPipe
   ],
   imports: [
     BrowserModule,
@@ -36,12 +33,11 @@ import { PagerComponent } from './components/pager/pager.component';
     RouterModule.forRoot([
       { path: '', redirectTo: '/news', pathMatch: 'full' },
       { path: 'news', component: NewsListComponent },
-      { path: 'pager', component: PagerComponent },
       { path: 'add', component: AddNewsComponent },
       { path: 'news/:id', component: NewsDetailsComponent }
     ])
   ],
-  providers: [NewsService, PagerService],
+  providers: [NewsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

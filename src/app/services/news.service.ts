@@ -34,9 +34,12 @@ export class NewsService {
   }
 
   // Get news list
-  getNews(): Observable<News[]> {
+  getNews(): Observable<any> {
     const news = JSON.parse(localStorage.getItem('news'));
-    return of(news);
+    return of({
+      data: news,
+      count: news.length
+    });
   }
 
   // Get single news
