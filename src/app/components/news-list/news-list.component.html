@@ -14,16 +14,14 @@
         <ul *ngFor="let new of news | filter:category | paginate: { itemsPerPage: 5, currentPage: p, totalItems: count} " class="list-group mb-3">
           <li class="list-group-item">
             {{new.title}}
-            <button [routerLink]="['/news/' + '/' + new.id]" 
-              [queryParams]="{ page: p, id: new.id, category: category}" 
-              class="btn btn-warning btn-sm pull-right">Details
+            <button [routerLink]="['/news/' + '/' + new.id]" [queryParams]="{ page: p, id: new.id, category: category}" class="btn btn-warning btn-sm pull-right">Details
             </button>
           </li>
         </ul>
         <div class="text-center">
           <pagination-controls (pageChange)="p = $event"></pagination-controls>
         </div>
-        <button [routerLink]="['/add']" class="btn btn-success btn-sm">Add New</button>
+        <button [routerLink]="['/add']" class="btn btn-success btn-lg">Add New</button>
       </div>
     </div>
   </div>

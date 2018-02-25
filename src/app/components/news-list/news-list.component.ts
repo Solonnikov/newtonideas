@@ -42,7 +42,6 @@ export class NewsListComponent implements OnInit {
     });
   }
 
-
   updateCategory(filter: string) {
     this.category = filter;
   }

@@ -17,6 +17,7 @@
             <div class="form-group">
               <label for="title">Category</label>
               <select class="form-control" [(ngModel)]="news.category" name="category" id="category" required>
+                <option value="" disabled="true" [selected]="!news.category">Please select</option>
                 <option value="" disbaled selected></option>
                 <option value="Life">Life</option>
                 <option value="Food">Food</option>

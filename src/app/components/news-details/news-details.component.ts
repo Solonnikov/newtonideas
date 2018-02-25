@@ -13,7 +13,7 @@ export class NewsDetailsComponent implements OnInit {
   singleNews: News;
   p: number;
   category: string;
-  
+
   constructor(
     public route: ActivatedRoute,
     public router: Router,
