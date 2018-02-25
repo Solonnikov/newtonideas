@@ -11,7 +11,7 @@
             <button type="button" class="btn btn-secondary" (click)="updateCategory('Food')">Food</button>
           </div>
         </div>
-        <ul *ngFor="let new of news | filter:category | paginate: { itemsPerPage: 5, currentPage: p } " class="list-group mb-3">
+        <ul *ngFor="let new of news | filter:category | paginate: { itemsPerPage: 5, currentPage: p, totalItems: count} " class="list-group mb-3">
           <li class="list-group-item">
             {{new.title}}
             <button [routerLink]="['/news/' + '/' + new.id]" 

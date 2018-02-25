@@ -10,6 +10,7 @@ import { ActivatedRoute, Router, Params } from '@angular/router';
 })
 export class NewsListComponent implements OnInit {
   news: News[] = [];
+  count: number;
   // pagination page
   p: number = 1;
   // filter 
@@ -32,9 +33,12 @@ export class NewsListComponent implements OnInit {
       if ('category' in params) {
         this.category = params['category']
       }
-      this.newsService.getNews().subscribe(news => {
-        this.news = news;
+      this.newsService.getNews().subscribe(res => {
+        console.log(res);
+        this.news = res.data;
+        this.count = res.count;
         console.log(this.news);
+        console.log(this.count);
       })
     });
   }
