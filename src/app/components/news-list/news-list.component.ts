@@ -29,6 +29,9 @@ export class NewsListComponent implements OnInit {
   ngOnInit() {
     this.route.queryParams.subscribe((params: Params) => {
       this.p = params['page']
+      if ('category' in params) {
+        this.category = params['category']
+      }
       this.newsService.getNews().subscribe(news => {
         this.news = news;
         console.log(this.news);

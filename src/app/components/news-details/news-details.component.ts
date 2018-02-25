@@ -12,7 +12,8 @@ import { Location } from '@angular/common';
 export class NewsDetailsComponent implements OnInit {
   singleNews: News;
   p: number;
-
+  category: string;
+  
   constructor(
     public route: ActivatedRoute,
     public router: Router,
@@ -23,6 +24,7 @@ export class NewsDetailsComponent implements OnInit {
   ngOnInit() {
     this.route.queryParams.subscribe((params: Params) => {
       this.p = params['page'];
+      this.category = params['category'];
       this.newsService.getNewsById(params['id']).subscribe(singleNews => {
         this.singleNews = singleNews[0];
         console.log(this.singleNews)
