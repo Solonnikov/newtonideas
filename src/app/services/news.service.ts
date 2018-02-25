@@ -2,11 +2,20 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { HttpClient } from '@angular/common/http';
+
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/observable/of';
+import 'rxjs/add/operator/delay';
+
 import { UUID } from 'angular2-uuid';
 import { NEWS } from '../news';
 import { News } from '../models/News';
+
+interface IServerResponse {
+  items: string[];
+  total: number;
+}
 
 @Injectable()
 export class NewsService {
@@ -33,13 +42,18 @@ export class NewsService {
     localStorage.setItem('news', JSON.stringify(this.news));
   }
 
-  // Get news list
-  getNews(): Observable<any> {
+  // Get news 
+  getNews(page: number): Observable<IServerResponse> {
     const news = JSON.parse(localStorage.getItem('news'));
-    return of({
-      data: news,
-      count: news.length
-    });
+    const perPage = 5;
+    const start = (page - 1) * perPage;
+    const end = start + perPage;
+
+    return Observable
+      .of({
+        items: news.slice(start, end),
+        total: news.length
+      }).delay(500);
   }
 
   // Get single news

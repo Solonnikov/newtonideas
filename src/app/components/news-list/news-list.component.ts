@@ -1,20 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, Input } from "@angular/core";
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/map';
+
 import { NewsService } from '../../services/news.service';
 import { News } from '../../models/News';
 import { ActivatedRoute, Router, Params } from '@angular/router';
-import * as _ from 'underscore';
 
 @Component({
   selector: 'app-news-list',
   templateUrl: './news-list.component.html',
-  styleUrls: ['./news-list.component.css']
+  styleUrls: ['./news-list.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NewsListComponent implements OnInit {
-  news: News[] = [];
-  count: number;
-  // pagination page
+  public loading = false;
+  asyncNews: Observable<string[]>;
   p: number = 1;
-  // filter 
+  total: number;
   category = '';
 
   constructor(
@@ -29,17 +32,30 @@ export class NewsListComponent implements OnInit {
   }
 
   ngOnInit() {
+    // get page and category from url to save the state after redirect
     this.route.queryParams.subscribe((params: Params) => {
-      this.p = params['page']
+      if ('page' in params) {
+        this.p = params['page'];
+        this.getPage(this.p);
+      } else {
+        this.getPage(1);
+      }
       if ('category' in params) {
         this.category = params['category']
       }
-      this.newsService.getNews().subscribe(news => {
-        console.log(news);
-        this.news = news.data;
-        this.count = news.count;
-      })
     });
+  }
+
+  // async get news with page parameters
+  getPage(page: number) {
+    this.loading = true;
+    this.asyncNews = this.newsService.getNews(page)
+      .do(res => {
+        this.total = res.total;
+        this.p = page;
+        this.loading = false;
+      })
+      .map(res => res.items);
   }
 
   updateCategory(filter: string) {

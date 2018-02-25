@@ -11,7 +11,8 @@
             <button type="button" class="btn btn-secondary" (click)="updateCategory('Food')">Food</button>
           </div>
         </div>
-        <ul *ngFor="let new of news | filter:category | paginate: { itemsPerPage: 5, currentPage: p, totalItems: count} " class="list-group mb-3">
+        <ul *ngFor="let new of asyncNews | async | paginate: { id: 'server', itemsPerPage: 5, currentPage: p, totalItems: total} "
+          class="list-group mb-3">
           <li class="list-group-item">
             {{new.title}}
             <button [routerLink]="['/news/' + '/' + new.id]" [queryParams]="{ page: p, id: new.id, category: category}" class="btn btn-warning btn-sm pull-right">Details
@@ -19,7 +20,10 @@
           </li>
         </ul>
         <div class="text-center">
-          <pagination-controls (pageChange)="p = $event"></pagination-controls>
+          <ngx-loading [show]="loading" [config]="{
+              backdropBackgroundColour: '#fff', backdropBorderRadius: '0px',
+              primaryColour: '#000', secondaryColour: '#000', tertiaryColour: '#000' }"></ngx-loading>
+          <pagination-controls (pageChange)="getPage($event)" id="server"></pagination-controls>
         </div>
         <button [routerLink]="['/add']" class="btn btn-success btn-lg">Add New</button>
       </div>

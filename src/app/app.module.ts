@@ -15,6 +15,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { FlashMessagesModule } from 'ngx-flash-messages';
 import { FilterPipe } from './pipes/filter.pipe';
 
+import { LoadingModule } from 'ngx-loading';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,6 +31,7 @@ import { FilterPipe } from './pipes/filter.pipe';
     HttpClientModule,
     FormsModule,
     FlashMessagesModule,
+    LoadingModule,
     NgxPaginationModule,
     RouterModule.forRoot([
       { path: '', redirectTo: '/news', pathMatch: 'full' },
