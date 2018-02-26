@@ -5,13 +5,13 @@
       <div class="col">
         <div class="form-group">
           <div class="btn-group" role="group" aria-label="Basic example">
-            <button type="button" class="btn btn-secondary" (click)="updateCategory('')">All</button>
-            <button type="button" class="btn btn-secondary" (click)="updateCategory('Health')">Health</button>
-            <button type="button" class="btn btn-secondary" (click)="updateCategory('Life')">Life</button>
-            <button type="button" class="btn btn-secondary" (click)="updateCategory('Food')">Food</button>
+            <button type="button" class="btn btn-secondary" (click)="filterCategory('')">All</button>
+            <button type="button" class="btn btn-secondary" (click)="filterCategory('Health')">Health</button>
+            <button type="button" class="btn btn-secondary" (click)="filterCategory('Life')">Life</button>
+            <button type="button" class="btn btn-secondary" (click)="filterCategory('Food')">Food</button>
           </div>
         </div>
-        <ul *ngFor="let new of asyncNews | async | filter: category | paginate: { id: 'server', itemsPerPage: 5, currentPage: p, totalItems: total} "
+        <ul *ngFor="let new of asyncNews | async | filter:category | paginate: { id: 'server', itemsPerPage: 5, currentPage: p, totalItems: total}"
           class="list-group mb-3">
           <li class="list-group-item">
             {{new.title}}

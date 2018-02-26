@@ -58,7 +58,19 @@ export class NewsListComponent implements OnInit {
       .map(res => res.items);
   }
 
-  updateCategory(filter: string) {
+  filterCategory(filter: string) {
+    this.loading = true;
     this.category = filter;
+    this.asyncNews = this.newsService.filterNews(filter)
+      .do(res => {
+        console.log(res);
+        this.total = res.total;
+        this.loading = false;
+      })
+      .map(res => res.items);
   }
+
+  // updateCategory(filter: string) {
+  //   this.category = filter;
+  // }
 }

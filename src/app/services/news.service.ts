@@ -56,6 +56,18 @@ export class NewsService {
       }).delay(500);
   }
 
+  // Filter news 
+  filterNews(filter: string): Observable<IServerResponse> {
+    const news = JSON.parse(localStorage.getItem('news'));
+
+    return Observable
+      .of({
+        // filtering categories and returning all data if filter equals ''
+        items: filter !== '' ? news.filter(element => element.category === filter) : news,
+        total: filter !== '' ? news.filter(element => element.category === filter).length : news.length
+      }).delay(500);
+  }
+
   // Get single news
   getNewsById(id: string): Observable<News[]> {
     const news = JSON.parse(localStorage.getItem('news'));
