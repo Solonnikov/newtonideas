@@ -11,6 +11,7 @@ import { FlashMessagesService } from 'ngx-flash-messages';
   styleUrls: ['./add-news.component.css']
 })
 export class AddNewsComponent implements OnInit {
+  public loading = false;
   news: News = {
     id: '',
     title: '',
@@ -27,6 +28,7 @@ export class AddNewsComponent implements OnInit {
   }
 
   onAddSubmit() {
+    this.loading = true;
     const newNews = {
       id: UUID.UUID(),
       title: this.news.title,
@@ -34,6 +36,7 @@ export class AddNewsComponent implements OnInit {
       category: this.news.category
     }
     this.newsService.addNews(newNews).subscribe(res => {
+      this.loading = false;
       this.flashMessagesService.show('News added', { classes: ['alert', 'alert-success'], timeout: 4000 });
       this.router.navigate(['/news']);
     },

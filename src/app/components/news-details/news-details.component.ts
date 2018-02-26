@@ -13,6 +13,7 @@ export class NewsDetailsComponent implements OnInit {
   singleNews: News;
   p: number;
   category: string;
+  public loading = false;
 
   constructor(
     public route: ActivatedRoute,
@@ -22,11 +23,13 @@ export class NewsDetailsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.loading = true;
     this.route.queryParams.subscribe((params: Params) => {
       this.p = params['page'];
       this.category = params['category'];
       this.newsService.getNewsById(params['id']).subscribe(singleNews => {
         this.singleNews = singleNews[0];
+        this.loading = false;
         console.log(this.singleNews)
       });
     });

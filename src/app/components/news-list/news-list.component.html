@@ -11,7 +11,7 @@
             <button type="button" class="btn btn-secondary" (click)="filterCategory('Food')">Food</button>
           </div>
         </div>
-        <ul *ngFor="let new of asyncNews | async | filter:category | paginate: { id: 'server', itemsPerPage: 5, currentPage: p, totalItems: total}"
+        <ul *ngFor="let new of asyncNews | async |  paginate: { id: 'server', itemsPerPage: 5, currentPage: p, totalItems: total} | filter:category"
           class="list-group mb-3">
           <li class="list-group-item">
             {{new.title}}

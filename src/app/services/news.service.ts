@@ -15,6 +15,7 @@ import { News } from '../models/News';
 interface IServerResponse {
   items: string[];
   total: number;
+  category?: string;
 }
 
 @Injectable()
@@ -64,7 +65,8 @@ export class NewsService {
       .of({
         // filtering categories and returning all data if filter equals ''
         items: filter !== '' ? news.filter(element => element.category === filter) : news,
-        total: filter !== '' ? news.filter(element => element.category === filter).length : news.length
+        total: filter !== '' ? news.filter(element => element.category === filter).length : news.length,
+        category: filter
       }).delay(500);
   }
 

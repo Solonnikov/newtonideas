@@ -41,7 +41,8 @@ export class NewsListComponent implements OnInit {
         this.getPage(1);
       }
       if ('category' in params) {
-        this.category = params['category']
+        const filter = localStorage.getItem('filter');
+        this.filterCategory(filter);
       }
     });
   }
@@ -59,7 +60,9 @@ export class NewsListComponent implements OnInit {
   }
 
   filterCategory(filter: string) {
+    localStorage.setItem('filter', filter);
     this.loading = true;
+    this.p = 1;
     this.category = filter;
     this.asyncNews = this.newsService.filterNews(filter)
       .do(res => {
@@ -69,8 +72,4 @@ export class NewsListComponent implements OnInit {
       })
       .map(res => res.items);
   }
-
-  // updateCategory(filter: string) {
-  //   this.category = filter;
-  // }
 }
