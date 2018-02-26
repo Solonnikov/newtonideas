@@ -40,7 +40,7 @@ export class NewsListComponent implements OnInit {
       } else {
         this.getPage(1);
       }
-      if ('category' in params) {
+      if (params['category']) {
         const filter = localStorage.getItem('filter');
         this.filterCategory(filter);
       }

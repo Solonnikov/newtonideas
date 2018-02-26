@@ -13,16 +13,15 @@
         </div>
         <ul *ngFor="let new of asyncNews | async |  paginate: { id: 'server', itemsPerPage: 5, currentPage: p, totalItems: total} | filter:category"
           class="list-group mb-3">
-          <li class="list-group-item">
+          <li [routerLink]="['/news/' + '/' + new.id]" [queryParams]="{ page: p, id: new.id, category: category}" class="list-group-item list-group-item-action">
             {{new.title}}
-            <button [routerLink]="['/news/' + '/' + new.id]" [queryParams]="{ page: p, id: new.id, category: category}" class="btn btn-warning btn-sm pull-right">Details
-            </button>
+            <span class="badge badge-warning p-2 pull-right">{{new.category}}</span>
           </li>
         </ul>
-        <div class="text-center">
+        <div class="text-center container">
           <ngx-loading [show]="loading" [config]="{
-              backdropBackgroundColour: '#fff', backdropBorderRadius: '0px',
-              primaryColour: '#000', secondaryColour: '#000', tertiaryColour: '#000' }"></ngx-loading>
+            backdropBackgroundColour: '#fff', backdropBorderRadius: '0px',
+            primaryColour: '#DCDCDC', secondaryColour: '#DCDCDC', tertiaryColour: '#DCDCDC'}"></ngx-loading>
           <pagination-controls (pageChange)="getPage($event)" id="server"></pagination-controls>
         </div>
         <button [routerLink]="['/add']" class="btn btn-success btn-lg">Add New</button>

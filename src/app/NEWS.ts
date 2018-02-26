@@ -36,7 +36,7 @@ export const NEWS: News[] = [
     "id": "6",
     "title": "Warren Buffett shareholder letter says Berkshire posted $29 billion gain from tax cut law",
     "description": "The new tax law gave Berkshire Hathaway a $29 billion gain, but the company found asking prices for businesses too high last year.",
-    "category": "Health"
+    "category": "Food"
   },
   {
     "id": "7",

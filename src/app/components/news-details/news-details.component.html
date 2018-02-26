@@ -1,8 +1,8 @@
 <ngx-loading [show]="loading" [config]="{
   backdropBackgroundColour: '#fff', backdropBorderRadius: '0px',
-  primaryColour: '#000', secondaryColour: '#000', tertiaryColour: '#000' }"></ngx-loading>
+  primaryColour: '#8f35aa'}"></ngx-loading>
 <section id="news-details">
-  <div class="container p-4">
+  <div *ngIf="singleNews" class="container p-4">
     <h3 class="display-4">News Details</h3>
     <div class="row">
       <div class="col">
@@ -22,5 +22,8 @@
         </div>
       </div>
     </div>
+  </div>
+  <div *ngIf="!singleNews" class="container text-center">
+    <h3>No news found. Please, try again</h3>
   </div>
 </section>
