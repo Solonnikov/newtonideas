@@ -5,15 +5,14 @@
       <div class="col">
         <div class="form-group">
           <div class="btn-group" role="group" aria-label="Basic example">
-            <button type="button" class="btn btn-secondary" (click)="filterCategory('')">All</button>
+            <!-- <button type="button" class="btn btn-secondary" (click)="filterCategory('')">All</button>
             <button type="button" class="btn btn-secondary" (click)="filterCategory('Health')">Health</button>
             <button type="button" class="btn btn-secondary" (click)="filterCategory('Life')">Life</button>
-            <button type="button" class="btn btn-secondary" (click)="filterCategory('Food')">Food</button>
+            <button type="button" class="btn btn-secondary" (click)="filterCategory('Food')">Food</button> -->
           </div>
         </div>
-        <ul *ngFor="let new of asyncNews | async |  paginate: { id: 'server', itemsPerPage: 5, currentPage: p, totalItems: total} | filter:category"
-          class="list-group mb-3">
-          <li [routerLink]="['/news/' + '/' + new.id]" [queryParams]="{ page: p, id: new.id, category: category}" class="list-group-item list-group-item-action">
+        <ul *ngFor="let new of news | paginate: { id: 'server', itemsPerPage: 5, currentPage: page, totalItems: total}" class="list-group mb-3">
+          <li [routerLink]="['/news/' + '/' + new.id]" [queryParams]="{ page: page, id: new.id, category: category}" class="list-group-item list-group-item-action">
             {{new.title}}
             <span class="badge badge-warning p-2 pull-right">{{new.category}}</span>
           </li>

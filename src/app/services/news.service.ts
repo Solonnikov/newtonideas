@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/map';
@@ -13,62 +13,65 @@ import { NEWS } from '../news';
 import { News } from '../models/News';
 
 interface IServerResponse {
-  items: string[];
+  items: News[];
   total: number;
   category?: string;
 }
 
+const NEWS_API: string = "http://localhost:3000/news";
+
 @Injectable()
 export class NewsService {
-  news: News[];
+  // news: News[];
 
   constructor(public http: HttpClient) {
-    if (localStorage.getItem('news') !== null) {
-      this.news = JSON.parse(localStorage.getItem('news'));
-      // Generate UUID
-      this.news.map(news => {
-        news.id = UUID.UUID();
-      });
-    } else {
-      this.news = NEWS;
-      // Generate UUID
-      this.news.map(news => {
-        news.id = UUID.UUID();
-      });
-    }
+    // if (localStorage.getItem('news') !== null) {
+    //   this.news = JSON.parse(localStorage.getItem('news'));
+    //   // Generate UUID
+    //   this.news.map(news => {
+    //     news.id = v
+    //   });
+    // } else {
+    //   this.news = NEWS;
+    //   // Generate UUID
+    //   this.news.map(news => {
+    //     news.id = UUID.UUID();
+    //   });
+    // }
   }
 
   // store news arr in ls on init
-  storeNews() {
-    localStorage.setItem('news', JSON.stringify(this.news));
+  // storeNews() {
+  //   localStorage.setItem('news', JSON.stringify(this.news));
+  // }
+
+  generateID() {
+    const id = UUID.UUID();
+    return id;
   }
 
   // Get news 
-  getNews(page: number): Observable<IServerResponse> {
-    const news = JSON.parse(localStorage.getItem('news'));
+  getNews(page: number): Observable<HttpResponse<any>> {
     const perPage = 5;
     const start = (page - 1) * perPage;
     const end = start + perPage;
 
-    return Observable
-      .of({
-        items: news.slice(start, end),
-        total: news.length
-      }).delay(500);
+    return this.http.get<any>(
+      `${NEWS_API}?_start=${start}&_end=${end}`, { observe: 'response' });
   }
 
   // Filter news 
-  filterNews(filter: string): Observable<IServerResponse> {
-    const news = JSON.parse(localStorage.getItem('news'));
+  // filterNews(filter: string): Observable<IServerResponse> {
+  //   const news = JSON.parse(localStorage.getItem('news'));
 
-    return Observable
-      .of({
-        // filtering categories and returning all data if filter equals ''
-        items: filter !== '' ? news.filter(element => element.category === filter) : news,
-        total: filter !== '' ? news.filter(element => element.category === filter).length : news.length,
-        category: filter
-      }).delay(500);
-  }
+  //   return Observable
+  //     .of({
+  //       // filtering categories and returning all data if filter equals ''
+  //       items: filter !== '' ? news.filter(element => element.category === filter) : news,
+  //       total: filter !== '' ? news.filter(element => element.category === filter).length : news.length,
+  //       category: filter
+  //     }).delay(500);
+  // }
 
   // Get single news
   getNewsById(id: string): Observable<News[]> {
