@@ -18,13 +18,18 @@ export class NewsService {
   }
 
   // Get news 
-  getNews(page: number): Observable<HttpResponse<any>> {
-    const perPage = 10;
+  getNews(page: number, filter: string): Observable<HttpResponse<any>> {
+    const perPage = 5;
     const start = (page - 1) * perPage;
     const end = start + perPage;
 
-    return this.http.get<any>(
-      `${NEWS_API}?_start=${start}&_end=${end}`, { observe: 'response' });
+    if (filter) {
+      return this.http.get<any>(
+        `${NEWS_API}?q=${filter}&_start=${start}&_end=${end}`, { observe: 'response' });
+    } else {
+      return this.http.get<any>(
+        `${NEWS_API}?_start=${start}&_end=${end}`, { observe: 'response' });
+    }
   }
 
   // Filter news by category
@@ -40,6 +45,6 @@ export class NewsService {
   }
 
   addNews(value: Object): Observable<any> {
-    return this.http.post(NEWS_API, value, {headers: this.headers});
+    return this.http.post(NEWS_API, value, { headers: this.headers }).map(res => console.log(res));
   }
 }

@@ -32,9 +32,10 @@ export class NewsListComponent implements OnInit {
     this.route.queryParams.subscribe((params: Params) => {
       if ('page' in params) {
         this.page = params['page'];
-        this.getPage(this.page);
+        this.category = params['category'];
+        this.getPage(this.page, this.category);
       } else {
-        this.getPage(1);
+        this.getPage(1, '');
       }
       if (params['category']) {
         const filter = params['category'];
@@ -44,9 +45,9 @@ export class NewsListComponent implements OnInit {
   }
 
   // async get news with page parameters
-  getPage(page: number) {
+  getPage(page: number, filter: string) {
     this.loading = true;
-    this.newsService.getNews(page).subscribe((news => {
+    this.newsService.getNews(page, filter).subscribe((news => {
       this.news = news.body;
       // getting x-total-count from reponse
       this.total = parseInt(news.headers.get('X-Total-Count'), 0);

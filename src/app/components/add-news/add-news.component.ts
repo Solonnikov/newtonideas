@@ -38,7 +38,7 @@ export class AddNewsComponent implements OnInit {
     this.newsService.addNews(newNews).subscribe(() => {
       this.loading = false;
       this.flashMessagesService.show('News added', { classes: ['alert', 'alert-success'], timeout: 4000 });
-      this.router.navigate(['/news']);
+      this.router.navigate(['/news'], {queryParams: {category: newNews.category}});
     },
       err => {
         this.loading = false;
