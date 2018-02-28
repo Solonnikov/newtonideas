@@ -25,10 +25,6 @@ export class NewsListComponent implements OnInit {
     public route: ActivatedRoute,
     public router: Router
   ) {
-    // store news on load
-    // if (localStorage.getItem('news') === null) {
-    //   this.newsService.storeNews();
-    // }
   }
 
   ngOnInit() {
@@ -40,10 +36,10 @@ export class NewsListComponent implements OnInit {
       } else {
         this.getPage(1);
       }
-      // if (params['category']) {
-      //   const filter = localStorage.getItem('filter');
-      //   this.filterCategory(filter);
-      // }
+      if (params['category']) {
+        const filter = params['category'];
+        this.filterCategory(filter);
+      }
     })
   }
 
@@ -52,30 +48,25 @@ export class NewsListComponent implements OnInit {
     this.loading = true;
     this.newsService.getNews(page).subscribe((news => {
       this.news = news.body;
-       // setting UUID
-      this.news.forEach(news => news.id = this.newsService.generateID());
-       // getting x-total-count from reponse
-      this.total = parseInt(news.headers.get('X-Total-Count'), 0);                                                      
+      // getting x-total-count from reponse
+      this.total = parseInt(news.headers.get('X-Total-Count'), 0);
       this.page = page;
       console.log(this.news);
-      console.log(this.total);
-      console.log(this.page);
+      console.log(`Total: ${this.total}`);
+      console.log(`Page: ${this.page}`);
       this.loading = false;
     }))
   }
 
-
-  // filterCategory(filter: string) {
-  //   localStorage.setItem('filter', filter);
-  //   this.loading = true;
-  //   this.p = 1;
-  //   this.category = filter;
-  //   this.asyncNews = this.newsService.filterNews(filter)
-  //     .do(res => {
-  //       console.log(res);
-  //       this.total = res.total;
-  //       this.loading = false;
-  //     })
-  //     .map(res => res.items);
-  // }
+  filterCategory(filter: string) {
+    this.loading = true;
+    this.newsService.filterNews(filter).subscribe(news => {
+      this.news = news.body;
+      this.total = news.body.length;
+      console.log(this.news);
+      console.log(`Total filter: ${news.body.length}`);
+      this.category = filter;
+      this.loading = false;
+    })
+  }
 }

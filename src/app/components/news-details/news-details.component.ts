@@ -10,8 +10,8 @@ import { Location } from '@angular/common';
   styleUrls: ['./news-details.component.css']
 })
 export class NewsDetailsComponent implements OnInit {
-  singleNews: News;
-  p: number;
+  singleNews: any;
+  page: number;
   category: string;
   public loading = false;
 
@@ -25,10 +25,10 @@ export class NewsDetailsComponent implements OnInit {
   ngOnInit() {
     this.loading = true;
     this.route.queryParams.subscribe((params: Params) => {
-      this.p = params['page'];
+      this.page = params['page'];
       this.category = params['category'];
       this.newsService.getNewsById(params['id']).subscribe(singleNews => {
-        this.singleNews = singleNews[0];
+        this.singleNews = singleNews.body;
         this.loading = false;
         console.log(this.singleNews)
       });

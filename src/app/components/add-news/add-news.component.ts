@@ -35,14 +35,14 @@ export class AddNewsComponent implements OnInit {
       description: this.news.description,
       category: this.news.category
     }
-    this.newsService.addNews(newNews).subscribe(res => {
+    this.newsService.addNews(newNews).subscribe(() => {
       this.loading = false;
       this.flashMessagesService.show('News added', { classes: ['alert', 'alert-success'], timeout: 4000 });
       this.router.navigate(['/news']);
     },
       err => {
-        this.flashMessagesService.show('Smth went wrong', { classes: ['alert', 'alert-success'], timeout: 4000 })
+        this.loading = false;
+        this.flashMessagesService.show('Smth went wrong', { classes: ['alert', 'alert-danger'], timeout: 4000 })
       });
-
   }
 }

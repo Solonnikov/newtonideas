@@ -13,7 +13,6 @@ import { NewsService } from './services/news.service';
 
 import { NgxPaginationModule } from 'ngx-pagination';
 import { FlashMessagesModule } from 'ngx-flash-messages';
-import { FilterPipe } from './pipes/filter.pipe';
 
 import { LoadingModule } from 'ngx-loading';
 
@@ -23,8 +22,7 @@ import { LoadingModule } from 'ngx-loading';
     NavbarComponent,
     NewsListComponent,
     NewsDetailsComponent,
-    AddNewsComponent,
-    FilterPipe
+    AddNewsComponent
   ],
   imports: [
     BrowserModule,
