@@ -1,0 +1,15 @@
+<div [formGroup]="form">
+  <label [attr.for]="singleNews.key">{{singleNews.label}}</label>
+
+  <div [ngSwitch]="singleNews.controlType" class="form-group">
+
+    <input *ngSwitchCase="'textbox'" class="form-control" [placeholder]="singleNews.key" [formControlName]="singleNews.key" [id]="singleNews.key" [type]="singleNews.type">
+
+    <select [id]="singleNews.key" *ngSwitchCase="'dropdown'" class="form-control" [formControlName]="singleNews.key">
+      <option *ngFor="let opt of singleNews.options" [value]="opt.key">{{opt.value}}</option>
+    </select>
+
+  </div>
+
+  <div class="errorMessage" *ngIf="!isValid && isTouched">{{singleNews.label}} is required</div>
+</div>
