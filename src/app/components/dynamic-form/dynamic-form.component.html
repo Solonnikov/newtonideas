@@ -1,0 +1,17 @@
+<section id="add-news">
+  <div class="container p-4">
+    <h3 class="display-4 text-center">Add News</h3>
+    <div class="row">
+      <div class="col-md-6 mx-auto">
+        <div class="card card-body">
+          <form (ngSubmit)="onSubmit()" [formGroup]="form">
+            <div *ngFor="let singleNews of news">
+              <app-news [singleNews]="singleNews" [form]="form"></app-news>
+            </div>
+            <button type="submit" class="btn btn-success btn-block" [disabled]="!form.valid">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
