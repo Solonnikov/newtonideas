@@ -8,3 +8,7 @@
 .ngx-pagination a, .ngx-pagination button {
   outline: 0;
 }
+
+.errorMessage{
+  color:red;
+}

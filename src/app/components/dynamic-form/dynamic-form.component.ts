@@ -38,13 +38,13 @@ export class DynamicFormComponent implements OnInit {
     console.log(newNews);
 
     this.newsService.addNews(newNews).subscribe(() => {
-      this.loading = false;
       this.flashMessagesService.show('News added', { classes: ['alert', 'alert-success'], timeout: 4000 });
       this.router.navigate(['/news'], { queryParams: { category: newNews.category } });
+      this.loading = false;
     },
       err => {
+        this.flashMessagesService.show('Smth went wrong', { classes: ['alert', 'alert-danger'], timeout: 4000 });
         this.loading = false;
-        this.flashMessagesService.show('Smth went wrong', { classes: ['alert', 'alert-danger'], timeout: 4000 })
       });
 
   }

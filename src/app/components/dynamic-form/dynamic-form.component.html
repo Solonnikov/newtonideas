@@ -8,9 +8,7 @@
             <div *ngFor="let singleNews of news">
               <app-news [singleNews]="singleNews" [form]="form"></app-news>
             </div>
-            <div class="form-row">
-              <button type="submit" class="btn btn-success btn-block" [disabled]="!form.valid">Submit</button>
-            </div>
+            <button type="submit" class="btn btn-success btn-block" [disabled]="!form.valid">Submit</button>
           </form>
         </div>
       </div>
